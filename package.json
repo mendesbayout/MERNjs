@@ -1,0 +1,34 @@
+{
+  "name": "reactxxxexpress",
+  "version": "1.0.0",
+  "description": "Starter kit for  apps",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Lucas",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.14.6"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^3.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "from": "^0.1.7",
+    "http-proxy-middleware": "^1.0.5",
+    "import": "0.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.22",
+    "morgan": "^1.10.0"
+  }
+}
