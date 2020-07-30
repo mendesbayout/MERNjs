@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 //@desc create post
 //@acess Public
 
-router.post('/', auth, (req, res) => {
+router.post('/items', (req, res) => {
    const newItem = new Item({
        name: req.body.name
    }); // based on model

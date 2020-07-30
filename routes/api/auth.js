@@ -24,7 +24,7 @@ const User = require('../../model/User');
  */
 
 
-router.post('/', async (req, res) => {
+router.post('/auth', async (req, res) => {
   console.log("user registering")
   const { name, email, password } = (req.body);
   console.log(req.body);
@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
  * @access  Private
  */
 
-router.get('/', async (req, res) => {
+router.get('/auth', async (req, res) => {
   try {
     const user = await User.findById(req.params.name);
     if (!name) throw Error('User Does not exist');

@@ -17,7 +17,7 @@ class ItemModal extends Component {
     state = {
         modal: false,//open or not
         name: ''
-    }
+    };
 
     toggle = () => {
         this.setState({

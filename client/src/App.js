@@ -14,6 +14,7 @@ class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
   }
+  
   render() {
     return (
       <Provider store={store}> 

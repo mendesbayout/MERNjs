@@ -18,6 +18,7 @@
       user: null
   };
 
+
   export default function (state = initialState, action) {
       switch(action.type) {
           case USER_LOADING:
@@ -35,6 +36,7 @@
               };
         case LOGIN_SUCESS:
         case REGISTER_SUCESS:
+            localStorage.setItem('token', action.payload.token);
             return {
                 ...state,
                 ...action.payload, 
@@ -45,7 +47,7 @@
         case LOGIN_FAIL:
         case LOGOUT_SUCESS:
         case REGISTER_FAIL:
-            localStorage.removeItem('token')
+        localStorage.removeItem('token');            
             return {
                 ...state,
                 token: null,

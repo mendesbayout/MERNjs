@@ -43,9 +43,9 @@ app.use(bodyParser.urlencoded({
 app.use(express.json());
 
 //Use routers
-app.use('/api/items', require('./routes/api/items'));
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
+app.use('/items', require('./routes/api/items'));
+app.use('/users', require('./routes/api/users'));
+app.use('/auth', require('./routes/api/auth'));
 
 const port = process.env.PORT || 5000;
 

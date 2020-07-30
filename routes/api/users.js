@@ -12,7 +12,7 @@ const router = Router();
 
 
 
-router.get('/', async (req, res) => {
+router.get('/users', async (req, res) => {
   try {
     const users = await User.find();
     if (!users) throw Error('No users exist');
