@@ -1,59 +1,74 @@
-import axios from 'axios';
-import { returnErrors } from  '../actions/errorActions';
-
-
-import { 
+import axios from "axios";
+import { returnErrors } from "../actions/errorActions";
+import {
   USER_LOADING,
   USER_LOADED,
   AUTH_ERROR,
- } from "../actions/types";
+  REGISTER_SUCESS,
+  REGISTER_FAIL,
+  LOGOUT_SUCESS,
+} from "../actions/types";
+
 
 export const loadUser = () => (dispatch, getState) => {
   //USER LOADING
   dispatch({ type: USER_LOADING });
-  
 
-    
-    //get token from local storage
-    const token = getState().auth.token;
-
- 
-    //fetch api + headers
-  
-    const config = {
-      headers: {
-        "Content-type": "application/json"
-      },
-    };
-
-    if (token) {
-      config.headers["x-auth-token"] = token;
-    }
-  
-
-    axios
-    .get('/auth', config)
-    .then(res =>
+  axios
+    .get('/auth', tokenConfig(getState))
+    .then((res) =>
       dispatch({
         type: USER_LOADED,
-        payload: res.data
-      })) 
-    .catch(err => {
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
       });
     });
 };
 
+export const register = ({ name, email, password }) => (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-  
-  
+  const body = JSON.stringify({ name, email, password });
 
+  axios
+    .post('/', body, config)
+    .then((res) =>
+      dispatch({
+        type: REGISTER_SUCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      );
+      dispatch({
+        type: REGISTER_FAIL,
+      });
+    })
+};
 
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCESS
+  };
+};
 
+export const tokenConfig = getState => {
+  const token = getState().auth.token;
 
-
-
-    
-
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+};

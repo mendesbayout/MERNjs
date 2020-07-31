@@ -5,20 +5,28 @@ const path = require('path');
 
 
 const app = express();
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
+
+app.use(express.json());
+
+//Use routers
+app.use('/items', require('./routes/api/items'));
+app.use('/users', require('./routes/api/users'));
+app.use('/', require('./routes/api/auth'));
 
 
 
 //DB config  
 const db = require('./config/keys').mongoURI;
 
-//Connect mongo
+//Connect mongoES
 mongoose
   .connect(db, { useCreateIndex: true, useNewUrlParser: true,  useUnifiedTopology: true })
   .then(() => console.log('DB connected'))
   .catch(err => console.log(err));
-
-//Declare port to localhost
 
 
 
@@ -35,17 +43,7 @@ if(process.env.NODE_ENV === 'production'){
 
 
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
-
-app.use(express.json());
-
-//Use routers
-app.use('/items', require('./routes/api/items'));
-app.use('/users', require('./routes/api/users'));
-app.use('/auth', require('./routes/api/auth'));
 
 const port = process.env.PORT || 5000;
 
